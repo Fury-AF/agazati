@@ -1,0 +1,71 @@
+@font-face {
+  font-family: Monst;
+  src: url(font/Montserrat/Montserrat-Italic-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: Roboto;
+  src: url(font/Roboto_Mono/static/RobotoMono-ExtraLightItalic.ttf);
+}
+* {
+  box-sizing: border-box;
+  margin: 0%;
+  padding: 0%;
+  font-family: var(--text);
+}
+/* ID UNIC KEY egy elem formázására jó */
+
+/* CSS osztaly több elemet tudok megformázni*/
+.navbar {
+  width: 80vw;
+  height: 80vh;
+  margin: 0 auto;
+  background-color: var(--complementer2);
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr; /* alapértelmezett */
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr 1fr;
+}
+.navbar2 {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+.navbar .item,
+.navbar2 .item {
+  background-color: var(--complementer);
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+/* Css változók */
+:root {
+  /* SZÍNEK */
+  --maincolor: #606c38;
+  --maincolor2: #283618;
+  --offcolor: #fefea0;
+  --complementer: #dda15e;
+  --complementer2: #bc6c25;
+  /* SZÖVEG */
+  --title: Monst;
+  --text: Roboto;
+}
+
+header {
+  background-color: var(--maincolor);
+}
+main {
+  background-color: var(--complementer2);
+}
+footer {
+  background-color: var(--maincolor2);
+}
+div {
+  background: var(--complementer);
+}
+span {
+  margin-top: 2rem;
+  padding: 25px;
+  border: 1px solid black;
+}

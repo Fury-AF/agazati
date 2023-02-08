@@ -1,0 +1,28 @@
+p{
+    padding-left: 40px;
+}
+ body {
+    background-color: rgb(222, 186, 212);
+    
+} 
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+      "h   h   h"
+      "asb asb asb"
+      "f   f  f";
+    grid-gap: 10px;
+  }
+  header {
+    grid-area: h;
+  }
+  #bal {
+    grid-area: asb;
+  }
+  article {
+    grid-area: ar;}
+
+footer {
+  grid-area: f;
+}

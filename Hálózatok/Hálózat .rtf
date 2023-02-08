@@ -1,0 +1,163 @@
+{\rtf1\ansi\ansicpg1250\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Maszk sz\'e1mol\'e1s a legnagyobb kioszthat\'f3 -1  azaz 50 szerver a 64-be f\'e9r bele sz\'f3r\'e1s 63 lesz a GTW 62 lesz  a maszka v\'e9ge 255.255.255.255-(64-1) \
+Legkisebb kiosztat\'f3 pedig az 192.168.20.0/\
+Legnagyobb a GW \
+ H\'e1l\'f3zat sz\'e1m 4         8       16       32     64     128 	256\
+ Ip c\'edm v\'e9ge   /30.    /29      /28      /27   / 26     / 25     /24\
+Haszn\'e1lhat\'f3   2        6        14	 30	62	  126        254\
+Amennyiben ugyan azon az IP c\'edmen vagyunk akkor 192.168.10.legnagyobb kiosztott/alap amit adtak  \
+\
+\
+1. Router: beletenni a kieg\'e9sz\'edt\uc0\u337 t. WHIC-2T\
+2. \'d3rajeles k\'e1bel onnan ahonnan az \'f3ra jel j\'f6n\
+3. Csekkolni a felh\uc0\u337  DSL kapcsolat\'e1t katt felh\u337 /konfig/DSL\
+4. Szerverek konfigja:  IP adres legkissebt\uc0\u337 l felfele az ip c\'edm desktop ip copfig\
+5.Konzolk\'e1bel bek\'f6t\'e9s:\
+				-ena \
+				-conf t\
+				-ho /k\'edv\'e1nt router n\'e9v/\
+				-int g/0/0 amerre mutatat annak a GW- kell be\'e1ll\'edtani\
+				-ip add  ip-c\'edm + maszk \
+				-no sh felkapcsol\'f3dik\
+				\
+				-int g0/1\
+				-ip add  ip-c\'edm + maszk \
+				-no sh felkapcsol\'f3dik\
+\
+				-int s0/0/0\
+				-ip add  ip-c\'edm + maszk \
+				-no sh felkapcsol\'f3dik\
+\
+Alap\'e9rtelmezett \'f3rajel megad\'e1s:\
+				-ip route 0.0.0.0 0.0.0.0 s0/0/0\
+\
+Consol vonal bel\'e9p\'e9s: \
+				-line con 0\
+				-pas (jelsz\'f3)\
+				-login\
+\
+H\'e1l\'f3zati vonal bel\'e9p\'e9s :\
+				-line vty 0 4\
+				-pass (jelsz\'f3)\
+				- login\
+				-exit \
+				-ser pass\
+Szecurity szel be\'e1ll\'edt\'e1sa:\
+				- ser pass \
+				-ena sec (jelsz\'f3)\
+				-ip domain-name  (n\'e9v) \
+				- usernem (user neve ) sec (jelsz\'f3)\
+Titkos\'edt\'e1s bekapcsol\'e1s:\
+				-crypto key generate  rsa\
+				-1024\
+Alkalmaz\'e1s a vty vonalra:\
+				-line vty 0 4 \
+				-transport input ssh\
+				-login local\
+				-exit\
+				-ip ssh v 2\
+				-end\
+				-w (ment\'e9s)\
+Ellen\uc0\u337 rz\'e9s:  -
+\f1 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 ssh -l admin (legk\'f6zelebbi GW ip-c\'edme)\
+		  - megadott jelsz\'f3 \
+\
+Switches-csatlakoz\'e1s: \
+			     	-ena \
+			     	-conf t \
+			     	-ho (switch name)\
+			    	-line con 0\
+				-pass (jelsz\'f3)\
+				-login\
+				-exit\
+				-ena sec (jelsz\'f3)\
+				-ip domain-n (n\'e9v)\
+				-user admin  sec (jelsz\'f3)\
+				-cry key gen rsa\
+				-1024\
+				-line vty 0 15\
+				-tr in ssh\
+				-login local\
+				-exit \
+				-int vlan 1\
+				-ip add (H\'e1tulr\'f3l egy ip-c\'edm az adott h\'e1lozaton) + maszk\
+				-no sh\
+ 				-exit\
+				-ip default-gateway (alap\'e9rtelmezett \'e1tj\'e1r\'f3 az adott h\'e1l\'f3zaton)\
+ 				-exit\
+				-w\
+\
+ISR csatlakoz\'e1s konzol k\'e1bellel:\
+				-ena \
+				- conf t \
+				-ho \
+				-s0/2/0\
+				-ip add (kissebb kiosztat\'f3 ip c\'edm)\
+				-cl ra 128000\
+				-no sh \
+				int g0/0/1 \
+				-ip add (az adott h\'e1l\'f3zat GW-je) + maszk\
+				-no sh \
+				-int g0/0/0 \
+				-ip add (kisebb ip c\'edm) + maszk\
+				-no sh \
+				-exit \
+\'datvonal ad\'e1s a sz\'fcl\uc0\u337  h\'e1l\'f3zatnak az IPS-b\u337 l:\
+				-ip router (sz\'fcl\uc0\u337  h\'e1l\'f3zat az az 0-val v\'e9gz\u337 d\u337  h\'e1l\'f3zat a IPS-b\u337 l a v\'e1llalat fele ) + maszk s0/2/0\
+				-end\
+				-w\
+\
+Otthoni h\'e1l\'f3zat:\
+			-laptop kikapcsol\
+			-wifi egys\'e9g berak\
+			-laptop katt desktop ip conf \'e9s Alap\'e9rt ip megn\'e9z\
+			-laptop katt  web browser keres\uc0\u337 be alap ipc\'edm be\'edr\'e1s\
+			- admin admin\
+			-internet setup leny\'edl\'f3 Static IP kiv\'e1laszt \
+			-ip adress (ISP \'e9s a helyi h\'e1l\'f3zat k\'f6z\'f6tti egyik ip c\'edm)\
+			-maszk megad\'e1s \
+			-default GW ips g0/0/0 -nak be\'e1ll\'edtott ip c\'edme \
+			-dns az els\uc0\u337  legk\'f6zelebbi h\'e1l\'f3zat GW-je \
+			-ment\'e9s\
+			-alap ip adresz \'e1t\'edr\'e1s a otthoni GW-re \
+			-ment\'e9s \
+			-\outl0\strokewidth0 laptop katt desktop ip conf stat \'e9s dhcp \'e1t \'e9s vissza katt \
+			-weben a GW-vel vissza jelentkez\'fcnk \
+			-max user megad\'e1s \
+			-wireless/ network name \'e1t\'edr\'e1s\
+			-PC wirelles kiv\'e1laszt\'e1s\
+			-connect v\'e1laszt\'e1s \
+			-\'fajra bel\'e9p\'fcnk a gw-vel \
+			-security-be Wpa2-personal\
+			-jelsz\'f3 megad\'e1s \
+\
+Levelez\'e9s be\'e1ll\'edt\'e1s:\
+			-DNS services/DNS \
+			-Name amit k\'e9rnek \
+			-Adress: Web szerver ip c\'edme\
+			 - \'e1t katt e-mail \
+			-Domain name: el\uc0\u337 bbiekben megadott \'85hu\
+			-user : valaki jelsz\'f3 \'85.. \
+G\'e9p konfig levelez\'e9s:\
+			-levelez\'e9s a desktopon\
+			-Your name: valami n\'e9v \
+			-e-mail@domin name.\
+			-incoming Mail server: email szerver ip c\'edme \
+			-out is ugyan ez \
+			felhaszn\'e1l\'f3: akit k\'e9rtek \
+			jelsz\'f3: amit k\'e9rtek \
+\
+\outl0\strokewidth0 \strokec2 \
+	\
+
+\f0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		\
+\
+				\
+				}

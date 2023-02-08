@@ -1,0 +1,143 @@
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+:root {
+  --kekHatter: blue;
+}
+
+body {
+  background-image: url(/kepek/hatter.jpg);
+}
+.l-main {
+  width: 80%;
+  background-color: white;
+  margin: 0 auto;
+}
+header {
+  /* background-repeat: no-repeat; */
+  text-align: center;
+  padding: 50px 15px;
+  background-image: url(/kepek/fejlec.jpg);
+  color: white;
+  font-size: large;
+}
+.l-galery .l-galery__group2,
+.l-galery .l-galery__group1 {
+  gap: 15px;
+}
+.l-galery {
+  gap: 100px;
+}
+.l-aside h2 {
+  margin-bottom: 10px;
+}
+.l-galery .polaroid img {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  background-color: white;
+  margin: auto;
+}
+.l-galery .polaroid {
+  padding-bottom: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+  width: fit-content;
+}
+.l-galery .jobb {
+transform: rotate(15deg);
+}
+.l-galery .bal {
+  transform: rotate(-15deg);
+  }
+
+.l-link ul {
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+  width: fit-content;
+}
+.l-link ul li {
+  background-color: var(--kekHatter);
+  list-style-type: none;
+  width: fit-content;
+  min-width: 150px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 5px;
+  padding: 5px;
+}
+
+.l-aside {
+  display: grid;
+  max-width: fit-content;
+  padding-left: 20px;
+  display: block;
+  padding-top: 20px;
+}
+
+.l-aside .l-aside__vers {
+  padding-right: 5%;
+}
+
+.l-link a {
+  text-decoration: none;
+  color: white;
+}
+
+article {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  text-align: justify;
+}
+
+article {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  display: block;
+}
+
+.l-galery {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: grid;
+  /* grid-template-columns: auto auto; */
+}
+
+.l-galery__group1,
+.l-galery__group2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.l-aside {
+  display: grid;
+}
+
+footer {
+  text-align: center;
+  background-color: var(--kekHatter);
+  padding: 15px 10px;
+}
+
+@media screen and (max-width: 950px) {
+  article {
+    grid-template-columns: 100%;
+  }
+  .l-galery {
+    width: fit-content;
+    margin: auto;
+    grid-template-columns: 100%;
+  }
+  .l-galery__group1, .l-galery__group2{
+    grid-template-columns: 1fr;
+  }
+  .l-link{
+    width: fit-content;
+    margin: auto;
+
+  }
+}

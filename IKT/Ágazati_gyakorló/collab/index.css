@@ -1,0 +1,77 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+:root {
+  --defaultPadding: 1.25em 2em;
+}
+
+/* Mobile */
+.l-main {
+  background-color: salmon;
+  height: 100vh;
+  max-height: 100vh;
+  display: grid;
+  /* grid-template-columns: 100%; */
+  grid-template-rows: auto 1fr auto;
+}
+
+.header {
+  background-color: gainsboro;
+  /* padding: 2em; */
+  padding: var(--defaultPadding);
+}
+.article {
+  background-color: cornflowerblue;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.article .article-text {
+  background-color: white;
+  padding: var(--defaultPadding);
+}
+
+.article .article-img {
+  background-color: crimson;
+  padding: var(--defaultPadding);
+}
+
+.footer {
+  background-color: blueviolet;
+  padding: var(--defaultPadding);
+}
+
+.elso-tablazat, .elso-tablazat tr, .elso-tablazat td, .elso-tablazat th{
+    border: 1px solid black;
+}
+.elso-tablazat td, .elso-tablazat th{
+    padding: var(--defaultPadding);
+}
+.elso-tablazat{
+    border-collapse: collapse;
+}
+
+.piros{
+    background-color: red;
+}
+/* MOBILE FIRST először css mobilera készítjük el és utána fejlesztünk további eszközökre */
+
+/* @media screen and (min-width: 900px) {
+  .article {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .l-main {
+    grid-template-rows: auto 1fr auto;
+  }
+} */
+
+@media screen and (max-width: 900px){
+    .article{
+        grid-template-columns: 1fr;
+    }
+
+}
+

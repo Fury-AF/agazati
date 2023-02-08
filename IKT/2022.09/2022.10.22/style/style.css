@@ -1,0 +1,159 @@
+@font-face {
+  font-family: freehand;
+  src: url(/2022.10.22/fonts/Freehand/Freehand-Regular.ttf);
+}
+@font-face {
+  font-family: island;
+  src: url(/2022.10.22/fonts/Island_Moments/IslandMoments-Regular.ttf);
+}
+
+:root {
+  /* SZÍNEK */
+
+  /* SZÖVEG */
+  --title: freehand;
+  --text: island;
+}
+
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+body {
+  background-color: #131515;
+  min-width: 100vh;
+  min-height: 100vh;
+  height: 100%;
+  display: grid;
+}
+main {
+  background-color: white;
+  width: 80%;
+  min-height: 100%;
+  margin: auto;
+  border-radius: 5px;
+  display: grid;
+  grid-template-areas:
+  "a a a "
+  "t g t2" ;
+}
+
+.galery{
+    grid-area: g;
+}
+.topics{
+    grid-area:t;
+}
+.topics2{
+    grid-area:t2;
+}
+.aside{
+    grid-area:a;
+}
+.aside {
+  background-color: white;
+  border-bottom: 1px solid black;
+  padding: 0.5rem;
+  display: grid;
+  grid-template-columns: 1fr repeat(3, auto) 1fr;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-top: 20px;
+  padding-bottom: 20px;
+  gap: 25px;
+
+  /* képes a gyerekelemeket vertikálisan és horizonytálisan rendezni  */
+  align-items: center;
+  justify-content: center;
+  /* ***************************** */
+
+  /* align-self: ;
+align-content: ;
+
+justify-content: ;
+justify-self: ;
+justify-content: ; */
+}
+
+/* aside div elemeit gridbe rakjuk és középre igazitjuk a span-eket  a képek alá */
+.aside div {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+}
+
+.aside img {
+  width: 16px;
+  height: auto;
+  object-fit: cover;
+}
+
+.home {
+  grid-column-start: 2;
+}
+
+.aside div span {
+  font-family: var(--text);
+}
+.galery {
+  display: grid;
+  grid-template-columns: repeat(2, 300px);
+  grid-template-rows: repeat(2, 300px);
+  margin: auto;
+  width: fit-content;
+}
+
+/* .topics {
+} */
+
+.galery img {
+  /* height: 300px;
+    width: 100%;
+    object-fit:cover;
+ */
+
+  /* width: 300px;
+height: 100%;
+ */
+
+  /* width: 300px;
+height: 300px; */
+
+  /* width: 300 px;
+height: 300px;
+object-fit: cover; */
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.galery h3 {
+  text-align: center;
+  font-family: var(--title);
+  background-color: rgba(255, 255, 255, 0.5);
+  position: relative;
+  top: 150px;
+  /* mozgás késleltetsé az animációnak */
+  transition: ease-in-out 0.3s;
+}
+
+/* seudo selector  */
+
+/* egyér mutatásra reagáljon */
+.grid-item:hover {
+  cursor: pointer;
+}
+/* háttér színe a cursor mozgásnak */
+.grid-item:hover h3 {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+/* kép mutatóra reagálás  */
+.grid-item img {
+  transition: ease-in-out 0.3s;
+}
+.grid-item:hover img {
+  cursor: pointer;
+  border-radius: 20px;
+}
